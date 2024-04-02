@@ -1,22 +1,28 @@
+import os
+
 import requests
-from settings import proverkacheka_api, proverkacheka_token
+from dotenv import load_dotenv
+
+load_dotenv()
+
+PROVERCKACHECKA_API = os.getenv('PROVERCKACHECKA_API')
+PROVERCKACHECKA_TOKEN = os.getenv('PROVERCKACHECKA_TOKEN')
 
 
 def get_by_qrraw(qrraw: str) -> dict:
-    data = {'token': proverkacheka_token, 'qrraw': qrraw}
-    response = requests.post(proverkacheka_api, data=data).json()
+    data = {'token': PROVERCKACHECKA_TOKEN, 'qrraw': qrraw}
+    response = requests.post(PROVERCKACHECKA_API, data=data).json()
     return response
 
 
 def get_by_qrfile(qrfile: str) -> dict:
-    data = {'token': proverkacheka_token}
+    data = {'token': PROVERCKACHECKA_TOKEN}
     files = {'qrfile': qrfile}
-    response = requests.post(proverkacheka_api, data=data, files=files).json()
+    response = requests.post(PROVERCKACHECKA_API, data=data, files=files).json()
     return response
 
 
 def get_by_qrurl(qrurl: str) -> dict:
-    data = {'token': proverkacheka_token, 'qrurl': qrurl}
-    response = requests.post(proverkacheka_api, data=data).json()
+    data = {'token': PROVERCKACHECKA_TOKEN, 'qrurl': qrurl}
+    response = requests.post(PROVERCKACHECKA_API, data=data).json()
     return response
-  
