@@ -18,7 +18,8 @@ def get_by_qrraw(qrraw: str) -> dict:
 def get_by_qrfile(qrfile: str) -> dict:
     data = {'token': PROVERCKACHECKA_TOKEN}
     files = {'qrfile': qrfile}
-    response = requests.post(PROVERCKACHECKA_API, data=data, files=files).json()
+    response = requests.post(PROVERCKACHECKA_API,
+                             data=data, files=files).json()
     return response
 
 
