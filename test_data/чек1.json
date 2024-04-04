@@ -1,0 +1,60 @@
+[
+    {
+        "_id": "65216c0b37fde76f1093c638",
+        "createdAt": "2023-10-07T14:32:43+00:00",
+        "ticket": {
+            "document": {
+                "receipt": {
+                    "cashTotalSum": 4400,
+                    "code": 3,
+                    "creditSum": 0,
+                    "dateTime": "2023-08-04T12:32:00",
+                    "ecashTotalSum": 0,
+                    "fiscalDocumentFormatVer": 4,
+                    "fiscalDocumentNumber": 6301,
+                    "fiscalDriveNumber": "7282440500144877",
+                    "fiscalSign": 3855909899,
+                    "fnsUrl": "www.nalog.gov.ru",
+                    "items": [
+                        {
+                            "name": "MUSLER Батончик натур клюква виш мед30г фл/п(",
+                            "nds": 2,
+                            "paymentType": 4,
+                            "price": 1999,
+                            "productType": 1,
+                            "productCodeDataError": "not supported product type 3",
+                            "quantity": 1,
+                            "sum": 1999
+                        },
+                        {
+                            "name": "БИОКЕЙ Батончик с клубник и цельным злаками 2",
+                            "nds": 1,
+                            "paymentType": 4,
+                            "price": 2499,
+                            "productType": 1,
+                            "productCodeDataError": "not supported product type 3",
+                            "quantity": 1,
+                            "sum": 2499
+                        }
+                    ],
+                    "kktRegId": "0006465475023389    ",
+                    "nds10": 182,
+                    "nds18": 417,
+                    "operationType": 1,
+                    "operator": "Товаровед магазина Галлямова",
+                    "prepaidSum": 0,
+                    "provisionSum": 0,
+                    "requestNumber": 85,
+                    "retailPlace": "Магазин  Магнит  Сантафе",
+                    "retailPlaceAddress": "423582, Татарстан Респ, Нижнекамский р-н, Нижнекамск г, Химиков пр-кт, дом № 93",
+                    "shiftNumber": 46,
+                    "taxationType": 1,
+                    "appliedTaxationType": 1,
+                    "totalSum": 4400,
+                    "user": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"ТАНДЕР\"",
+                    "userInn": "2310031475  "
+                }
+            }
+        }
+    }
+]

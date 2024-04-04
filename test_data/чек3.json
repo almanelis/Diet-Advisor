@@ -1,0 +1,220 @@
+[
+    {
+        "_id": "652ee351f7938adb062616ad",
+        "createdAt": "2023-10-17T19:41:05+00:00",
+        "ticket": {
+            "document": {
+                "receipt": {
+                    "cashTotalSum": 0,
+                    "code": 3,
+                    "creditSum": 0,
+                    "dateTime": "2023-10-08T18:09:00",
+                    "ecashTotalSum": 261367,
+                    "fiscalDocumentFormatVer": 4,
+                    "fiscalDocumentNumber": 178344,
+                    "fiscalDriveNumber": "7281440500105313",
+                    "fiscalSign": 1482568178,
+                    "items": [
+                        {
+                            "name": "К.Ц.Спагет.в/с гр.В 400г Экстра М",
+                            "nds": 2,
+                            "paymentType": 4,
+                            "price": 1699,
+                            "productType": 1,
+                            "productCodeDataError": "not supported product type 3",
+                            "quantity": 2,
+                            "sum": 3398
+                        },
+                        {
+                            "name": "РОЛЛТОН ВБП курица 60г уп.100шт МАРЕВЕН",
+                            "nds": 2,
+                            "paymentType": 4,
+                            "price": 1949,
+                            "productType": 1,
+                            "productCodeDataError": "not supported product type 3",
+                            "quantity": 4,
+                            "sum": 7796
+                        },
+                        {
+                            "name": "TRIOL Наб.игр.ЗАБАВ.д/кош. WEN.X.H.F.T.C",
+                            "nds": 1,
+                            "paymentType": 4,
+                            "price": 9999,
+                            "productType": 1,
+                            "productCodeDataError": "not supported product type 3",
+                            "quantity": 1,
+                            "sum": 9999
+                        },
+                        {
+                            "name": "Снэки ТРУБ.хр.со вк.сг.мол.400г ЭССЕН ПР",
+                            "nds": 2,
+                            "paymentType": 4,
+                            "price": 11999,
+                            "productType": 1,
+                            "productCodeDataError": "not supported product type 3",
+                            "quantity": 1,
+                            "sum": 11999
+                        },
+                        {
+                            "name": "LAYS Чипсы вк.мол.зел.лука 140г ФРИТО ЛЕ",
+                            "nds": 1,
+                            "paymentType": 4,
+                            "price": 13299,
+                            "productType": 1,
+                            "productCodeDataError": "not supported product type 3",
+                            "quantity": 1,
+                            "sum": 13299
+                        },
+                        {
+                            "name": "GAMMA Щетка овал.мал.125х80мм ЗООСЕРВИС",
+                            "nds": 1,
+                            "paymentType": 4,
+                            "price": 14999,
+                            "productType": 1,
+                            "quantity": 1,
+                            "sum": 14999
+                        },
+                        {
+                            "name": "*ЕГОР.МК Сел.ПО-ЦАР.чес.в/м 180г РУСРЫБА",
+                            "nds": 2,
+                            "paymentType": 4,
+                            "price": 7999,
+                            "productType": 1,
+                            "quantity": 1,
+                            "sum": 7999
+                        },
+                        {
+                            "name": "*ДОШ.Лапша КВИСТИ вк.кур.70г ДОШИРАК КОЯ",
+                            "nds": 2,
+                            "paymentType": 4,
+                            "price": 2029,
+                            "productType": 1,
+                            "quantity": 4,
+                            "sum": 8116
+                        },
+                        {
+                            "name": "TRIOL Удочка-драз.МЫШКА WEN.X.H.F.T.CO",
+                            "nds": 1,
+                            "paymentType": 4,
+                            "price": 14999,
+                            "productType": 1,
+                            "quantity": 1,
+                            "sum": 14999
+                        },
+                        {
+                            "name": "ВКУСНЯЕВ Мол.паст.2,5% п/э 800г АЛАБУГА",
+                            "nds": 2,
+                            "paymentType": 4,
+                            "price": 4279,
+                            "productType": 33,
+                            "productCodeData": {
+                                "gtin": 4670007360092,
+                                "rawProductCode": "0104670007360092215&NB-Q",
+                                "productIdType": 6,
+                                "sernum": "5&NB-Q"
+                            },
+                            "quantity": 1,
+                            "sum": 4279
+                        },
+                        {
+                            "name": "ЧУДО Йогурт вк.клуб-зем.2% 290г ВБД",
+                            "nds": 2,
+                            "paymentType": 4,
+                            "price": 7499,
+                            "productType": 33,
+                            "productCodeData": {
+                                "gtin": 4690228107290,
+                                "rawProductCode": "0104690228107290215<4':j",
+                                "productIdType": 6,
+                                "sernum": "5<4':j"
+                            },
+                            "quantity": 1,
+                            "sum": 7499
+                        },
+                        {
+                            "name": "ЧУДО Йогурт вк.клуб-зем.2% 290г ВБД",
+                            "nds": 2,
+                            "paymentType": 4,
+                            "price": 7499,
+                            "productType": 33,
+                            "productCodeData": {
+                                "gtin": 4690228107290,
+                                "rawProductCode": "0104690228107290215-<rI9",
+                                "productIdType": 6,
+                                "sernum": "5-<rI9"
+                            },
+                            "quantity": 1,
+                            "sum": 7499
+                        },
+                        {
+                            "name": "LIBER.Пакеты д/мус.с зат.15х35л БИОСФЕРА",
+                            "nds": 1,
+                            "paymentType": 4,
+                            "price": 7999,
+                            "productType": 1,
+                            "quantity": 1,
+                            "sum": 7999
+                        },
+                        {
+                            "name": "СЕЛЯН.Крупа греч.ядр.б/раз.400г .",
+                            "nds": 2,
+                            "paymentType": 4,
+                            "price": 5999,
+                            "productType": 1,
+                            "quantity": 1,
+                            "sum": 5999
+                        },
+                        {
+                            "name": "*CAMAY Гель BOT.ЦВ.ГР.д/д 250мл ЮНИЛЕВЕР",
+                            "nds": 1,
+                            "paymentType": 4,
+                            "price": 16999,
+                            "productType": 1,
+                            "quantity": 1,
+                            "sum": 16999
+                        },
+                        {
+                            "name": "МАР.Асс.Ф.М.ф-к сел.м.кап.160г МАРТИ",
+                            "nds": 2,
+                            "paymentType": 4,
+                            "price": 7999,
+                            "productType": 1,
+                            "quantity": 1,
+                            "sum": 7999
+                        },
+                        {
+                            "name": "КР.Ц.Пр.колб.пл.копч.с сыр.400г",
+                            "nds": 2,
+                            "paymentType": 4,
+                            "price": 6999,
+                            "productType": 1,
+                            "quantity": 1,
+                            "sum": 6999
+                        }
+                    ],
+                    "kktRegId": "0006048093005774    ",
+                    "nds10": 8144,
+                    "nds18": 28634,
+                    "operationType": 1,
+                    "operator": "Эрунлю Нурcиля Валерьевна, Продавец-каccир",
+                    "operatorInn": "022601485959",
+                    "prepaidSum": 0,
+                    "properties": {
+                        "propertyName": "X5",
+                        "propertyValue": "O804;POS01-BO-O804;ea6d5b53572d4a0ebf4317474e19d911;8d21968add40196d6732c3fcc465d417"
+                    },
+                    "provisionSum": 0,
+                    "requestNumber": 415,
+                    "retailPlace": "O804  15940-Пятерочка",
+                    "retailPlaceAddress": "423582, 16 ,Республика Татарстан (Татарстан), м.р-н Нижнекамский, г/п город Нижнекамск, г Нижнекамск,, пр-кт Шинников, Зд. 42",
+                    "shiftNumber": 315,
+                    "taxationType": 1,
+                    "appliedTaxationType": 1,
+                    "totalSum": 261367,
+                    "user": "Агроторг ООО",
+                    "userInn": "7825706086  "
+                }
+            }
+        }
+    }
+]
