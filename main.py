@@ -2,9 +2,10 @@ import logging
 import asyncio
 
 from aiogram import Bot, Dispatcher
+from aiogram.fsm.storage.redis import RedisStorage, Redis
 
 from config_data.config import Config, load_config
-from handlers import other_handlers, user_handlers
+from handlers import other_handlers, user_handlers, user_form_handlers
 from keyboards.main_menu import set_main_menu
 
 # Инициализируем логгер
@@ -28,13 +29,19 @@ async def main():
     # Инициализируем бот и диспетчер
     bot = Bot(token=config.tg_bot.token,
               parse_mode='HTML')
-    dp = Dispatcher()
+
+    # Инициализируем Redis
+    redis = Redis(host='localhost')
+    storage = RedisStorage(redis=redis)
+
+    dp = Dispatcher(storage=storage)
 
     # Настраиваем главное меню бота
     await set_main_menu(bot)
 
     # Регистрируем роутеры в диспетчере
     dp.include_router(user_handlers.router)
+    dp.include_router(user_form_handlers.router)
     dp.include_router(other_handlers.router)
 
     # Пропускаем накопившиеся апдейты и запускаем polling

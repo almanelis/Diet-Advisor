@@ -4,13 +4,16 @@ from aiogram.types import Message
 
 from lexicon.lexicon import LEXICON
 from filters.filters import IsJSON
+from keyboards.keyboards import create_inline_kb
 
 router = Router()
 
 
 @router.message(CommandStart())
 async def process_start_command(message: Message):
-    await message.answer(LEXICON[message.text])
+    reply_markup = create_inline_kb(1, 'btn_user_form')
+    await message.answer(LEXICON[message.text],
+                         reply_markup=reply_markup)
 
 
 @router.message(Command(commands='help'))
