@@ -1,5 +1,5 @@
-from sqlalchemy import Integer, String, ForeignKey, DateTime, func
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy import Integer, String,  DateTime, func
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 # Декларативный класс модели ДБ
@@ -12,14 +12,13 @@ class User(Base):
     __tablename__ = 'user'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    tg_id: Mapped[int] = mapped_column(Integer, unique=True ,nullable=False)
+    tg_id: Mapped[int] = mapped_column(Integer, unique=True, nullable=False)
     created_at: Mapped[DateTime] = mapped_column(DateTime, default=func.now())
-    updated_at: Mapped[DateTime] = mapped_column(DateTime, default=func.now(), onupdate=func.now())
+    updated_at: Mapped[DateTime] = mapped_column(DateTime, default=func.now(),
+                                                 onupdate=func.now())
 
-    profile: Mapped['Profile'] = relationship(back_populates='user')
 
-
-# Модель профиля пользователя со связью OneToOne
+# Модель профиля пользователя
 class Profile(Base):
     __tablename__ = 'profile'
 
@@ -30,6 +29,4 @@ class Profile(Base):
     weight: Mapped[int] = mapped_column(Integer, nullable=False)
     height: Mapped[int] = mapped_column(Integer, nullable=False)
 
-    user_id: Mapped[int] = mapped_column(Integer, ForeignKey('user.id'))
-    user: Mapped['User'] = relationship(back_populates='profile')
-    
+    user_id: Mapped[int] = mapped_column(Integer, nullable=False)

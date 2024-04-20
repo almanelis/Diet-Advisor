@@ -5,7 +5,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import default_state, State, StatesGroup
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from database.models import Profile
+from database.methods import add_profile, get_profile, update_profile
 from keyboards import create_inline_kb
 
 router = Router()
@@ -18,6 +18,8 @@ class FSMFillForm(StatesGroup):
     fill_gender = State()
     fill_weight = State()
     fill_height = State()
+
+    profile_for_change = None
 
 
 # Этот хэндлер срабатывает на команду "/cancel" в любых состояниях
@@ -43,13 +45,37 @@ async def process_cancel_command_state(message: Message, state: FSMContext):
     await state.clear()
 
 
+@router.callback_query(F.data == 'btn_change_profile',
+                       StateFilter(default_state))
+async def change_profile(callback: CallbackQuery,
+                         state: FSMContext,
+                         session: AsyncSession):
+    profile_for_change = await get_profile(session, callback.from_user.id)
+    FSMFillForm.profile_for_change = profile_for_change
+    await callback.answer()
+    await callback.message.answer(text='Пожалуйста, введите ваше имя')
+    await state.set_state(FSMFillForm.fill_name)
+
+
 # Этот хэндлер срабатывает на команду кнопку начала заполнения анкеты
 # и переводит бота в состояние ожидания ввода имени
 @router.callback_query(F.data == "btn_user_form", StateFilter(default_state))
-async def process_fillform_command(callback: CallbackQuery, state: FSMContext):
-    await callback.message.answer(text='Пожалуйста, введите ваше имя')
-    # Устанавливаем состояние ожидания ввода имени
-    await state.set_state(FSMFillForm.fill_name)
+async def process_fillform_command(callback: CallbackQuery,
+                                   state: FSMContext,
+                                   session: AsyncSession):
+    # Проверяем есть ли у пользователя профиль
+    user_profile = await get_profile(session, callback.from_user.id)
+    if user_profile:
+        reply_markup = create_inline_kb(1, 'btn_change_profile')
+        await callback.message.answer(
+            text='Профиль уже существует.\nЖелаете его изменить?',
+            reply_markup=reply_markup)
+    # Если не существует начинаем заполнение
+    else:
+        await callback.answer()
+        await callback.message.answer(text='Пожалуйста, введите ваше имя')
+        # Устанавливаем состояние ожидания ввода имени
+        await state.set_state(FSMFillForm.fill_name)
 
 
 # Этот хэндлер срабатывает, если введено корректное имя
@@ -147,27 +173,25 @@ async def warning_not_weight(message: Message):
              'заполнение анкеты - отправьте команду /cancel'
     )
 
+
 # Этот хэндлер срабатывает, если введен корректный рост
 # сохраняет информацию в бд и предлагает просмотреть профиль
 @router.message(StateFilter(FSMFillForm.fill_height), F.text.isdigit())
-async def process_height_sent(message: Message, state: FSMContext, session: AsyncSession):
+async def process_height_sent(message: Message,
+                              state: FSMContext,
+                              session: AsyncSession):
     await state.update_data(height=message.text)
-    # Сохраняем информацию о профиле пользователя
+    # Сохраняем/обновляем информацию о профиле пользователя
     data = await state.get_data()
-    obj = Profile(
-        name=data['name'],
-        age=data['age'],
-        gender=data['gender'],
-        weight=data['weight'],
-        height=data['height'],
-        user_id=message.from_user.id,
-    )
-    session.add(obj)
-    await session.commit()
-    
+    if FSMFillForm.profile_for_change:
+        await update_profile(session, data, message.from_user.id)
+    else:
+        await add_profile(session, data, message)
     await state.clear()
     await message.answer('Спасибо, анкета успешно сохранена!'
                          '\n\n/profile - для просмотра профиля')
+
+    FSMFillForm.profile_for_change = None
 
 
 @router.message(StateFilter(FSMFillForm.fill_height))
@@ -179,23 +203,26 @@ async def warning_not_height(message: Message):
     )
 
 
-# Этот хэндлер будет срабатывать на отправку команды /showdata
+# Этот хэндлер будет срабатывать на отправку команды /profile
 # и отправлять в чат данные анкеты, либо сообщение об отсутствии данных
-# @router.message(Command(commands='profile'), StateFilter(default_state))
-# async def process_showdata_command(message: Message):
-#     # Отправляем пользователю анкету, если она есть в "базе данных"
-#     if message.from_user.id in user_dict:
-#         await message.answer(
-#             text=f'Имя: {user_dict[message.from_user.id]["name"]}\n'
-#                  f'Возраст: {user_dict[message.from_user.id]["age"]}\n'
-#                  f'Пол: {user_dict[message.from_user.id]["gender"]}\n'
-#                  f'Вес: {user_dict[message.from_user.id]["weight"]}\n'
-#                  f'Рост: {user_dict[message.from_user.id]["height"]}'
-#         )
-#     else:
-#         reply_markup = create_inline_kb(1, 'btn_user_form')
-#         # Если анкеты пользователя в базе нет - предлагаем заполнить
-#         await message.answer(
-#             text='Вы еще не заполняли анкету. Чтобы приступить нажмите кнопку',
-#             reply_markup=reply_markup
-#         )
+@router.message(Command(commands='profile'), StateFilter(default_state))
+async def process_showdata_command(message: Message, session: AsyncSession):
+    user_profile = await get_profile(session, message.from_user.id)
+    # Отправляем пользователю анкету, если она есть в "базе данных"
+    if user_profile:
+        reply_markup = create_inline_kb(1, 'btn_change_profile')
+        await message.answer(
+            text=f'Имя: {user_profile.name}\n'
+                 f'Возраст: {user_profile.age}\n'
+                 f'Пол: {user_profile.gender}\n'
+                 f'Вес: {user_profile.weight}\n'
+                 f'Рост: {user_profile.height}',
+            reply_markup=reply_markup,
+        )
+    else:
+        reply_markup = create_inline_kb(1, 'btn_user_form')
+        # Если анкеты пользователя в базе нет - предлагаем заполнить
+        await message.answer(
+            text='Вы еще не заполняли анкету. Чтобы приступить нажмите кнопку',
+            reply_markup=reply_markup
+        )
