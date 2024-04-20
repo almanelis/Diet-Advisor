@@ -22,7 +22,7 @@ services:
   bot:
     container_name: diet-advisor-bot
     build: .
-    command: sh -c "python -m bot"
+    command: sh -c "make migrate && python -m bot"
     env_file:
       - ./.env
     restart: always
