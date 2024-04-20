@@ -16,7 +16,11 @@
    ```
    pip install -r requirements.txt
    ```
-4. Запускаем бот
+4. Выполняем миграции
+   ```
+   alembic upgrade head
+   ```
+5. Запускаем бот
    ```
    python main.py
    ```
