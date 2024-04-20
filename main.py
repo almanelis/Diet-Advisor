@@ -34,6 +34,7 @@ dp.include_router(other_handlers.router)
 
 async def on_startup(bot):
     run_param = False
+
     if run_param:
         await drop_db()
 
