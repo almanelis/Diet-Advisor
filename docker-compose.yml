@@ -19,10 +19,14 @@ services:
     restart: on-failure
     ports: 
       - "5432:5432"
+    environment:
+      POSTGRES_USER: diet-advisor-bot
+      POSTGRES_PASSWORD: peach
+      POSTGRES_DB: diet-advisor-bot
   bot:
     container_name: diet-advisor-bot
     build: .
-    command: sh -c "make migrate && python -m bot"
+    command: python main.py
     env_file:
       - ./.env
     restart: always
